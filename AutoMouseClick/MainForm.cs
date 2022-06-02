@@ -73,7 +73,7 @@ namespace AutoMouseClick
             if (GetCursorPos(out newMousePos))
             {
                 // if mouse is moved, stop the count down timer, start the timeout count down timer
-                if (oldMousePos.X != newMousePos.X && oldMousePos.Y != newMousePos.Y)
+                if (oldMousePos.X != newMousePos.X && oldMousePos.Y != newMousePos.Y && !btnStart.Enabled)
                 {
                     // record position to check if mouse is moved
                     oldMousePos = newMousePos;
@@ -85,9 +85,8 @@ namespace AutoMouseClick
                         lblSystemMsg.Text = "Mouse movement detected: [" + Cursor.Position.X + "," + Cursor.Position.Y + "]";
                     });
                     
-                    // reset timers
+                    // Stop timer and wait movement time out
                     tmrCountDown.Enabled = false;
-                    tmrCountDownMouseMovTimeout.Enabled = false;
                     tmrCountDownMouseMovTimeout.Enabled = true;
                 }
             }
@@ -180,13 +179,17 @@ namespace AutoMouseClick
 
         private void tmrCountDownMouseMovTimeout_Tick(object sender, EventArgs e)
         {
-            // Timeout since last mouse movement reached, continue the count down
-            tmrCountDown.Enabled = true;
-
-            lblSystemMsg.Invoke((MethodInvoker)delegate
+            // Only continue if timer was not stopped
+            if (!btnStart.Enabled)
             {
-                lblSystemMsg.Text = "";
-            });
+                // Timeout since last mouse movement reached, continue the count down
+                tmrCountDown.Enabled = true;
+
+                lblSystemMsg.Invoke((MethodInvoker)delegate
+                {
+                    lblSystemMsg.Text = "";
+                });
+            }
         }
 
         private void ncCountDown_ValueChanged(object sender, EventArgs e)

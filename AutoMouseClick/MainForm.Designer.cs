@@ -240,7 +240,7 @@
             this.lblSystemMsg.Size = new System.Drawing.Size(400, 25);
             this.lblSystemMsg.TabIndex = 5;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -249,7 +249,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Mouse Magic";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
